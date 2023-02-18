@@ -78,7 +78,7 @@ def stats(update, context):
     mem_a = get_readable_file_size(memory.available)
     mem_u = get_readable_file_size(memory.used)
     if config_dict['EMOJI_THEME']:
-            stats = f'<b>╭─《🌐 BOT STATISTICS 🌐》</b>\n' \
+            stats = f'<b>╭《🌐 BOT STATISTICS 🌐》</b>\n' \
                     f'<b>├ 🛠 Updated On: </b>{last_commit}\n'\
                     f'<b>├ ⌛ Uptime: </b>{currentTime}\n'\
                     f'<b>├ 🤖 Version: </b>{version}\n'\
@@ -91,7 +91,7 @@ def stats(update, context):
                     f'<b>╰ 🔻 Download Data:</b> {recv}\n\n'
 
     else:
-            stats = f'<b>╭─《🌐 BOT STATISTICS 🌐》</b>\n' \
+            stats = f'<b>╭《🌐 BOT STATISTICS 🌐》</b>\n' \
                     f'<b>├  Updated On: </b>{last_commit}\n'\
                     f'<b>├  Uptime: </b>{currentTime}\n'\
                     f'<b>├  Version: </b>{version}\n'\
@@ -149,12 +149,6 @@ def stats(update, context):
 
 def start(update, context):
     buttons = ButtonMaker()
-    if config_dict['EMOJI_THEME']:
-        buttons.buildbutton(f"😎 {config_dict['START_BTN1_NAME']}", f"{config_dict['START_BTN1_URL']}")
-        buttons.buildbutton(f"🔥 {config_dict['START_BTN2_NAME']}", f"{config_dict['START_BTN2_URL']}")
-    else:
-        buttons.buildbutton(f"{config_dict['START_BTN1_NAME']}", f"{config_dict['START_BTN1_URL']}")
-        buttons.buildbutton(f"{config_dict['START_BTN2_NAME']}", f"{config_dict['START_BTN2_URL']}")
     reply_markup = buttons.build_menu(2)
     if CustomFilters.authorized_user(update) or CustomFilters.authorized_chat(update):
         start_string = f'''This bot can mirror all your links to Google Drive!
@@ -165,7 +159,7 @@ Type /{BotCommands.HelpCommand} to get a list of available commands
         else:
             sendMessage(start_string, context.bot, update.message, reply_markup)
     else:
-        text = f"Not Authorized user, deploy your own mirror bot"
+        text = f""
         if config_dict['PICS']:
             sendPhoto(text, context.bot, update.message, rchoice(config_dict['PICS']), reply_markup)
         else:
