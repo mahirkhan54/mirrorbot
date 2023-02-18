@@ -70,16 +70,16 @@ def getHerokuDetails(h_api_key, h_app_name):
         quota_remain = account_quota - quota_used
         if EMOJI_THEME is True:
             abc += f'<b></b>\n'
-            abc += f'<b>╭─《🌐 HEROKU STATS 🌐》</b>\n'
+            abc += f'<b>╭《🌐 HEROKU STATS 🌐》</b>\n'
             abc += f"<b>├ 💪🏻 FULL</b>: {get_readable_time(account_quota)}\n"
             abc += f"<b>├ 👎🏻 USED</b>: {get_readable_time(quota_used)}\n"
-            abc += f"<b>├ 👍🏻 FREE</b>: {get_readable_time(quota_remain)}\n"
+            abc += f"<b>╰ 👍🏻 FREE</b>: {get_readable_time(quota_remain)}\n"
         else:
             abc += f'<b></b>\n'
-            abc += f'<b>╭─《 HEROKU STATS 》</b>\n'
+            abc += f'<b>╭《 HEROKU STATS 》</b>\n'
             abc += f"<b>├ FULL</b>: {get_readable_time(account_quota)}\n"
             abc += f"<b>├ USED</b>: {get_readable_time(quota_used)}\n"
-            abc += f"<b>├ FREE</b>: {get_readable_time(quota_remain)}\n"
+            abc += f"<b>╰ FREE</b>: {get_readable_time(quota_remain)}\n"
         # App Quota
         AppQuotaUsed = 0
         OtherAppsUsage = 0
@@ -161,7 +161,7 @@ def stats(update, context):
     mem_a = get_readable_file_size(memory.available)
     mem_u = get_readable_file_size(memory.used)
     if EMOJI_THEME is True:
-            stats = f'<b>╭─《🌐 BOT STATISTICS 🌐》</b>\n' \
+            stats = f'<b>╭《🌐 BOT STATISTICS 🌐》</b>\n' \
                     f'<b>├ 🛠 Updated On: </b>{last_commit}\n'\
                     f'<b>├ ⌛ Uptime: </b>{currentTime}\n'\
                     f'<b>├ 🟢 OS Uptime: </b>{osUptime}\n'\
@@ -173,7 +173,7 @@ def stats(update, context):
                     f'<b>╰ 🔻 Download Data:</b> {recv}\n\n'
 
     else:
-            stats = f'<b>╭─《 BOT STATISTICS 》</b>\n' \
+            stats = f'<b>╭《 BOT STATISTICS 》</b>\n' \
                     f'<b>├  Updated On: </b>{last_commit}\n'\
                     f'<b>├  Uptime: </b>{currentTime}\n'\
                     f'<b>├  OS Uptime: </b>{osUptime}\n'\
@@ -196,7 +196,7 @@ def stats(update, context):
         user_task = 'No Limit Set' if USER_TASKS_LIMIT is None else f'{USER_TASKS_LIMIT} Tasks/user'
 
         if EMOJI_THEME is True: 
-            stats += f'<b>╭─《 ⚠️ BOT LIMITS ⚠️ 》</b>\n'\
+            stats += f'<b>╭《 ⚠️ BOT LIMITS ⚠️ 》</b>\n'\
                      f'<b>├ 🧲 Torrent/Direct: </b>{torrent_direct}\n'\
                      f'<b>├ 🔐 Zip/Unzip: </b>{zip_unzip}\n'\
                      f'<b>├ 🔷 Leech: </b>{leech_limit}\n'\
@@ -205,7 +205,7 @@ def stats(update, context):
                      f'<b>├ 💣 Total Tasks: </b>{total_task}\n'\
                      f'<b>╰ 🔫 User Tasks: </b>{user_task}\n\n'
         else: 
-            stats += f'<b>╭─《  BOT LIMITS  》</b>\n'\
+            stats += f'<b>╭《  BOT LIMITS  》</b>\n'\
                      f'<b>├  Torrent/Direct: </b>{torrent_direct}\n'\
                      f'<b>├  Zip/Unzip: </b>{zip_unzip}\n'\
                      f'<b>├  Leech: </b>{leech_limit}\n'\
@@ -225,12 +225,6 @@ def stats(update, context):
 
 def start(update, context):
     buttons = ButtonMaker()
-    if EMOJI_THEME is True:
-        buttons.buildbutton(f"😎 {START_BTN1_NAME}", f"{START_BTN1_URL}")
-        buttons.buildbutton(f"🔥 {START_BTN2_NAME}", f"{START_BTN2_URL}")
-    else:
-        buttons.buildbutton(f"{START_BTN1_NAME}", f"{START_BTN1_URL}")
-        buttons.buildbutton(f"{START_BTN2_NAME}", f"{START_BTN2_URL}")
     reply_markup = buttons.build_menu(2)
     if CustomFilters.authorized_user(update) or CustomFilters.authorized_chat(update):
         start_string = f'''This bot can mirror all your links to Google Drive!
@@ -241,7 +235,7 @@ Type /{BotCommands.HelpCommand} to get a list of available commands
         else:
             sendMarkup(start_string, context.bot, update.message, reply_markup)
     else:
-        text = f"Not Authorized user, deploy your own mirror bot"
+        text = f""
         if PICS:
             sendPhoto(text, context.bot, update.message, random.choice(PICS), reply_markup)
         else:
